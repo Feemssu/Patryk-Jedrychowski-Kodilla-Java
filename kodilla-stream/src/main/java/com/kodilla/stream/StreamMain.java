@@ -1,6 +1,7 @@
 package com.kodilla.stream;
 
 import com.kodilla.stream.beautifier.PoemBeautifier;
+import com.kodilla.stream.iterable.NumbersGenerator;
 import com.kodilla.stream.lambda.ExpressionExecutor;
 import com.kodilla.stream.reference.FunctionalCalculator;
 
@@ -30,5 +31,7 @@ public class StreamMain {
         poemBeautifier.beautify("Third text",text -> text.concat(" ABC"));
         poemBeautifier.beautify("Fourth text",text -> text.toLowerCase() );
         poemBeautifier.beautify("Fifth text",text -> text.replace('e','3'));
+
+        NumbersGenerator.generateEven(100);
     }
 }
