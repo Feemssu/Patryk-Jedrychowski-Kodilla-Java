@@ -1,37 +1,26 @@
 package com.kodilla.stream;
 
-import com.kodilla.stream.beautifier.PoemBeautifier;
-import com.kodilla.stream.iterable.NumbersGenerator;
-import com.kodilla.stream.lambda.ExpressionExecutor;
-import com.kodilla.stream.reference.FunctionalCalculator;
+import com.kodilla.stream.forumuser.Forum;
+import com.kodilla.stream.forumuser.ForumUser;
 
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class StreamMain {
 
-    public static void main(String []args){
-        ExpressionExecutor expressionExecutor = new ExpressionExecutor();
+    public static void main(String[] args) {
+        Forum forum = new Forum();
 
-        System.out.println("Calculating expressions with lamdas");
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a + b);
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a - b);
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a * b);
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a / b);
+        Map<Integer, ForumUser> resultMap = forum.getUserList().stream()
+                .filter(user -> user.getSex() == 'M')
+                .filter(user -> user.getDateOfBirth().getYear() < 2002)
+                .filter(user -> user.getPostsNumber() > 1)
+                .collect(Collectors.toMap(ForumUser::getUserID, user -> user));
 
-        System.out.println("Calculating expressions with method references");
-        expressionExecutor.executeExpression(3, 4, FunctionalCalculator::multiplyAByB);
-        expressionExecutor.executeExpression(3, 4, FunctionalCalculator::addAToB);
-        expressionExecutor.executeExpression(3, 4, FunctionalCalculator::subBFromA);
-        expressionExecutor.executeExpression(3, 4, FunctionalCalculator::divideAByB);
+        System.out.println("Map elements: " + resultMap.size());
+        resultMap.entrySet().stream()
+                .map(entry -> entry.getKey() + ": " + entry.getValue())
+                .forEach(System.out::println);
 
-
-        System.out.println("\nExercise: ");
-        PoemBeautifier poemBeautifier = new PoemBeautifier();
-        poemBeautifier.beautify("First text",text -> text.toUpperCase() );
-        poemBeautifier.beautify("Second text",text -> "ABC ".concat(text) );
-        poemBeautifier.beautify("Third text",text -> text.concat(" ABC"));
-        poemBeautifier.beautify("Fourth text",text -> text.toLowerCase() );
-        poemBeautifier.beautify("Fifth text",text -> text.replace('e','3'));
-
-        NumbersGenerator.generateEven(100);
     }
 }
