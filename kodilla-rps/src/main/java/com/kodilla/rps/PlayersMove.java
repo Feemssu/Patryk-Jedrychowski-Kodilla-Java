@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class PlayersMove {
 
-
+Game game;
     private Scanner scanner = new Scanner(System.in);
     private String userChoice;
     private String compChoice;
