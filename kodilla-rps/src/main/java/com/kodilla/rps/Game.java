@@ -68,8 +68,7 @@ public class Game {
     }
     private void endGame() {
         System.out.println("Thank you for playing.");
-        end = true;
-        isPlaying=false;
+        System.exit(0);
     }
 
     public String userMove() {
@@ -87,27 +86,16 @@ public class Game {
                 } else if (choice.equals("3")) {
                     userChoice = "scissor";
                     return userChoice;
-                }
-
-
-                else if (choice.equals("x")) {
+                } else if (choice.equals("x")) {
                     System.out.println("Are you sure, you want leave game ? y - yes or n - no");
                     String leaveChoice = scanner.nextLine();
                     if (leaveChoice.equals("y")) {
-//                        endGame();
-//                        choiceCheck = false;
-                        end = true;
-                        isPlaying=false;
-//                        System.out.println("Thank you");
-
-                    }
-                    else if (leaveChoice.equals("n")) {
+                       endGame();
+                    } else if (leaveChoice.equals("n")) {
                         choiceCheck = false;
                         userMove();
                     }
-                }
-
-                else if (choice.equals("n")) {
+                } else if (choice.equals("n")) {
                     System.out.println("Are you sure, you want restart game ? y - yes or n - no");
                     String restartChoice = scanner.nextLine();
                     if (restartChoice.equals("y")) {
